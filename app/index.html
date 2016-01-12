@@ -175,11 +175,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                   <form is="iron-form" id="formPost"  method="post" action="/">
 
-                  <paper-input  id="name" name="name" value="{{name}}" error-message="Caracter Invalido Solo Letras " auto-validate pattern="[a-zA-Z + \s]*"label="Nombre Completo" minlength="10" maxlength="50" required>
+                  <paper-input  id="name" name="name" value="{{item.name}}" error-message="Caracter Invalido Solo Letras " auto-validate pattern="[a-zA-Z + \s]*"label="Nombre Completo" minlength="10" maxlength="50" required>
                       <div prefix><iron-icon icon="social:person"></iron-icon></div>
                   </paper-input>
 
-                   <paper-input id="email" name="email" value="{{email}}" error-message="El Correo de llevar el Dominio @laureate.net " maxlength="40"  auto-validate label="Email"auto-validate pattern='^[a-zA-Z]+.[a-zA-Z]+@+laureate+.net$'  required>
+                   <paper-input id="email" name="email" value="{{item.email}}" error-message="El Correo de llevar el Dominio @laureate.net " maxlength="40"  auto-validate label="Email"auto-validate pattern='^[a-zA-Z]+.[a-zA-Z]+@+laureate+.net$'  required>
                        <div prefix><iron-icon icon="maps:local-post-office"></iron-icon></div>
                    </paper-input>
 
@@ -190,7 +190,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                       <div prefix><iron-icon icon="hardware:sim-card"></iron-icon></div>
                   </paper-input>
                    <br/>
-                    <paper-button type="submit" onclick="submitform()"  raised class="colorful" >Submit</paper-button>
+                    <paper-button type="submit" onclick=" submitHandler(event)"  raised class="colorful" >Submit</paper-button>
 
                     <paper-toast id="toast2" text="Form status: was Submited.">
                       <span role="button" tabindex="0" style="color: #eeff41;margin: 20px" >Success</span>
@@ -200,12 +200,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   url="https://mc-polymer.herokuapp.com/api/employes"
                   method="POST"
                   handle-as="json"
-                  on-response="showSuccess"
+                  params = '{{item}}'
                   auto
                   content-type="application/x-www-form-urlencoded">
-
                 </iron-ajax>
+                <script>
 
+              function submitHandler(event) {
+                    Polymer.dom(event).submit();
+                  }
+                </script>
                 </paper-material>
                     <style is="custom-style">
                       .horizontal-section {
